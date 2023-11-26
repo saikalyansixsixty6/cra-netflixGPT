@@ -1,11 +1,17 @@
 
 
+import Body from './components/Body'
+
 function App() {
+ 
   return (
-    <div className="App">
-      Hello World
-    </div>
-  );
+    <>
+      <div>
+      <Body/>
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App
+
