@@ -1,17 +1,20 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import {createUserWithEmailAndPassword} from "firebase/auth"
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth"
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
 
  const [login,setLogin] = useState(true);
-
+  
+ const navigate = useNavigate()
  const name = useRef(null)
  const email = useRef(null);
  const password = useRef(null);
+
  const [errorMessage,setErrorMessage] = useState(null);
 
  const toggleSignInForm = () =>{
@@ -31,13 +34,16 @@ const Login = () => {
             // Signed up 
             const user = userCredential.user;
             console.log(user)
-            // ...
+            navigate("/browse")
+            
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             setErrorMessage(errorCode+"-"+errorMessage)
             // ..
+            console.log(errorMessage);
+            
           });
 
 
@@ -50,6 +56,20 @@ const Login = () => {
 
         }else{
           //signin logic
+
+          signInWithEmailAndPassword(auth, email.current.value,password.current.value)
+           .then((userCredential) => {
+           // Signed in 
+           const user = userCredential.user;
+              console.log(user)
+              navigate("/browse")
+            })
+          .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              setErrorMessage(errorCode+"-"+errorMessage)
+              console.log(errorMessage)
+            });
         }
 
  }
