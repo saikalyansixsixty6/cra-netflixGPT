@@ -6,6 +6,7 @@ const Browse = () => {
         <Header/>
       </div>
     )
+
   }
   
   export default Browse

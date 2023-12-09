@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth"
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "firebase/auth"
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -31,10 +31,18 @@ const Login = () => {
           //signup logic
           createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
           .then((userCredential) => {
-            // Signed up 
+          
             const user = userCredential.user;
-            console.log(user)
+            updateProfile(user, {
+           displayName: name.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+             }).then(() => {
+            // Profile updated!
             navigate("/browse")
+           }).catch((error) => {
+              setErrorMessage(error.message)
+          });
+            
+            
             
           })
           .catch((error) => {
