@@ -14,7 +14,7 @@ const useNowPlayingMovies = () => {
     }
     useEffect(() => {
         getNowPlayingMovies()
-    
+        
       
     }, [])
 
