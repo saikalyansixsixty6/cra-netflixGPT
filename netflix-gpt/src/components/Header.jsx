@@ -84,7 +84,7 @@ const Header = () => {
           )}
 
 
-        <button onClick={handleGptSearch} className="h-10 w-30 px-2 py-2 mx-2 my-2 bg-purple-800 text-white rounded-lg">GPT Search</button>
+        <button onClick={handleGptSearch} className="h-10 w-30 px-2 py-2 mx-2 my-2 bg-purple-800 text-white rounded-lg">{showGptSearch ? "Homepage":"GPT Search"}</button>
         <img src={user.photoURL} alt="usericon" className="h-12 w-12"/>
         <button onClick={handleSignOut} className="font-bold text-white">(Sign Out)</button>
       </div>}
